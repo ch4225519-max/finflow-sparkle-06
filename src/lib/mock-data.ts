@@ -1,6 +1,8 @@
 import { faker } from "@faker-js/faker";
 
-faker.seed(42);
+const SEED = 42;
+function reseed() { faker.seed(SEED); }
+reseed();
 
 export type AccountType = "checking" | "savings" | "salary" | "investment" | "credit" | "business";
 
