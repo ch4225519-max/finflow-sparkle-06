@@ -128,7 +128,7 @@ function sparkline(points = 12, base = 100) {
   );
 }
 
-export function generateAccounts(count = 6): Account[] {
+export function generateAccounts(count = 6): Account[] { reseed();
   const types: AccountType[] = ["checking", "savings", "salary", "investment", "credit", "business"];
   return Array.from({ length: count }, (_, i) => {
     const bank = faker.helpers.arrayElement(BANKS);
@@ -154,7 +154,7 @@ export function generateAccounts(count = 6): Account[] {
   });
 }
 
-export function generateTransactions(accounts: Account[], count = 500): Transaction[] {
+export function generateTransactions(accounts: Account[], count = 500): Transaction[] { reseed();
   return Array.from({ length: count }, () => {
     const m = faker.helpers.arrayElement(MERCHANTS);
     const isIncome = m.category === "Salary" || faker.number.int({ min: 0, max: 20 }) === 0;
@@ -256,7 +256,7 @@ export function generateMonthlyHistory(months = 12) {
   });
 }
 
-export function generateCategorySpend() {
+export function generateCategorySpend() { reseed();
   return BUDGET_CATEGORIES.slice(0, 8).map((c) => ({
     name: c.name,
     value: Math.round(faker.number.int({ min: 80, max: 900 })),
@@ -265,7 +265,7 @@ export function generateCategorySpend() {
   }));
 }
 
-export function generateHeatmap(days = 90) {
+export function generateHeatmap(days = 90) { reseed();
   return Array.from({ length: days }, (_, i) => ({
     day: i,
     value: Math.max(0, Math.round(Math.sin(i / 5) * 40 + faker.number.int({ min: 0, max: 90 }))),
