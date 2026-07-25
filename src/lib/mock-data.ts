@@ -241,17 +241,18 @@ export const SPLIT_GROUPS: SplitGroup[] = [
 ];
 
 export function generateMonthlyHistory(months = 12) {
+  reseed();
   return Array.from({ length: months }, (_, i) => {
-    const d = new Date();
+    const d = new Date(2026, 0, 1);
     d.setMonth(d.getMonth() - (months - 1 - i));
-    const income = 5200 + Math.round(Math.sin(i / 2) * 800 + Math.random() * 600);
-    const expenses = 3400 + Math.round(Math.cos(i / 3) * 500 + Math.random() * 700);
+    const income = 5200 + Math.round(Math.sin(i / 2) * 800 + faker.number.int({ min: 0, max: 600 }));
+    const expenses = 3400 + Math.round(Math.cos(i / 3) * 500 + faker.number.int({ min: 0, max: 700 }));
     return {
       month: d.toLocaleString("en", { month: "short" }),
       income,
       expenses,
       savings: income - expenses,
-      net: 22000 + i * 900 + Math.round(Math.random() * 1200),
+      net: 22000 + i * 900 + faker.number.int({ min: 0, max: 1200 }),
     };
   });
 }
