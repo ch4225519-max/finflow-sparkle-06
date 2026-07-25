@@ -42,7 +42,7 @@ function AnalyticsPage() {
     () =>
       Array.from({ length: 84 }, (_, i) => ({
         d: i,
-        v: Math.round(Math.abs(Math.sin(i / 3) * 60) + Math.random() * 40),
+        v: Math.round(Math.abs(Math.sin(i / 3) * 60) + Math.abs(Math.cos(i / 2)) * 40),
       })),
     [],
   );
