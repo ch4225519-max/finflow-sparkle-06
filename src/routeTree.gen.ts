@@ -9,38 +9,168 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppTransactionsRouteImport } from './routes/app.transactions'
+import { Route as AppSplitRouteImport } from './routes/app.split'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
+import { Route as AppGoalsRouteImport } from './routes/app.goals'
+import { Route as AppBudgetRouteImport } from './routes/app.budget'
+import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
+import { Route as AppAccountsRouteImport } from './routes/app.accounts'
 
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTransactionsRoute = AppTransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSplitRoute = AppSplitRouteImport.update({
+  id: '/split',
+  path: '/split',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGoalsRoute = AppGoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBudgetRoute = AppBudgetRouteImport.update({
+  id: '/budget',
+  path: '/budget',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAccountsRoute = AppAccountsRouteImport.update({
+  id: '/accounts',
+  path: '/accounts',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/accounts': typeof AppAccountsRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/budget': typeof AppBudgetRoute
+  '/app/goals': typeof AppGoalsRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/split': typeof AppSplitRoute
+  '/app/transactions': typeof AppTransactionsRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/accounts': typeof AppAccountsRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/budget': typeof AppBudgetRoute
+  '/app/goals': typeof AppGoalsRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/split': typeof AppSplitRoute
+  '/app/transactions': typeof AppTransactionsRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/accounts': typeof AppAccountsRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/budget': typeof AppBudgetRoute
+  '/app/goals': typeof AppGoalsRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/split': typeof AppSplitRoute
+  '/app/transactions': typeof AppTransactionsRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/app/accounts'
+    | '/app/analytics'
+    | '/app/budget'
+    | '/app/goals'
+    | '/app/notifications'
+    | '/app/settings'
+    | '/app/split'
+    | '/app/transactions'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app/accounts'
+    | '/app/analytics'
+    | '/app/budget'
+    | '/app/goals'
+    | '/app/notifications'
+    | '/app/settings'
+    | '/app/split'
+    | '/app/transactions'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/accounts'
+    | '/app/analytics'
+    | '/app/budget'
+    | '/app/goals'
+    | '/app/notifications'
+    | '/app/settings'
+    | '/app/split'
+    | '/app/transactions'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +178,102 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/transactions': {
+      id: '/app/transactions'
+      path: '/transactions'
+      fullPath: '/app/transactions'
+      preLoaderRoute: typeof AppTransactionsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/split': {
+      id: '/app/split'
+      path: '/split'
+      fullPath: '/app/split'
+      preLoaderRoute: typeof AppSplitRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/notifications': {
+      id: '/app/notifications'
+      path: '/notifications'
+      fullPath: '/app/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/goals': {
+      id: '/app/goals'
+      path: '/goals'
+      fullPath: '/app/goals'
+      preLoaderRoute: typeof AppGoalsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/budget': {
+      id: '/app/budget'
+      path: '/budget'
+      fullPath: '/app/budget'
+      preLoaderRoute: typeof AppBudgetRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/analytics': {
+      id: '/app/analytics'
+      path: '/analytics'
+      fullPath: '/app/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/accounts': {
+      id: '/app/accounts'
+      path: '/accounts'
+      fullPath: '/app/accounts'
+      preLoaderRoute: typeof AppAccountsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAccountsRoute: typeof AppAccountsRoute
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppBudgetRoute: typeof AppBudgetRoute
+  AppGoalsRoute: typeof AppGoalsRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppSplitRoute: typeof AppSplitRoute
+  AppTransactionsRoute: typeof AppTransactionsRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAccountsRoute: AppAccountsRoute,
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppBudgetRoute: AppBudgetRoute,
+  AppGoalsRoute: AppGoalsRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppSplitRoute: AppSplitRoute,
+  AppTransactionsRoute: AppTransactionsRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
